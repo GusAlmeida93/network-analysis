@@ -7,6 +7,11 @@ name = "pypi"
 pandas = "*"
 jupyter = "*"
 networkx = "*"
+matplotlib = "*"
+scipy = "*"
+sklearn = "*"
+pytest = "*"
+netwulf = "*"
 
 [dev-packages]
 
