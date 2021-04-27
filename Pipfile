@@ -12,6 +12,7 @@ scipy = "*"
 sklearn = "*"
 pytest = "*"
 netwulf = "*"
+pyvis = "*"
 
 [dev-packages]
 

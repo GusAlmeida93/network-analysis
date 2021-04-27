@@ -1,0 +1,123 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 800px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"color": "#fc91d17", "id": "12344535000169", "label": "12344535000169", "shape": "dot", "size": 10, "title": "ONYX FUNDO DE INVESTIMENTO MULTIMERCADO CREDITO PRIVADO INVESTIMENTO NO EXTERIOR", "value": 702.3457166582783}, {"color": "#0095d9", "id": "807777000162", "label": "807777000162", "shape": "dot", "size": 10, "title": "DAYCOVAL RENDA FIXA FUNDO DE INVESTIMENTO CR\u00c9DITO PRIVADO", "value": 145.71461700507012}, {"color": "#fc91d17", "id": "10447046000107", "label": "10447046000107", "shape": "dot", "size": 10, "title": "GARIN SPECIAL FUNDO DE INVESTIMENTO MULTIMERCADO", "value": 922.7463941339926}, {"color": "#fc91d17", "id": "30338659000113", "label": "30338659000113", "shape": "dot", "size": 10, "title": "CHESS ALPHA FUNDO DE INVESTIMENTO EM COTAS DE FUNDOS DE INVESTIMENTO MULTIMERCADO", "value": 650.4930674226231}, {"color": "c1c1c1", "id": "9260031000156", "label": "9260031000156", "shape": "dot", "size": 10, "title": "FIQFIDC SRM", "value": 251.67365738230117}, {"color": "#fc91d17", "id": "29661053000135", "label": "29661053000135", "shape": "dot", "size": 10, "title": "CHESS MASTER FUNDO DE INVESTIMENTO MULTIMERCADO", "value": 650.4930674226231}, {"color": "#fc91d17", "id": "13855026000163", "label": "13855026000163", "shape": "dot", "size": 10, "title": "UJAY HEDGE FUNDO DE INVESTIMENTO MULTIMERCADO", "value": 32.49587712564076}, {"color": "c1c1c1", "id": "32754734000152", "label": "32754734000152", "shape": "dot", "size": 10, "title": "QUASAR AGRO - FUNDO DE INVESTIMENTO IMOBILIARIO", "value": 32.49587712564076}, {"color": "#fc91d17", "id": "13418910000130", "label": "13418910000130", "shape": "dot", "size": 10, "title": "UJAY HEDGE FUNDO DE INVESTIMENTO EM COTAS DE FUNDOS DE INVESTIMENTO MULTIMERCADO", "value": 1000.0}, {"color": "#fc91d17", "id": "16839107000168", "label": "16839107000168", "shape": "dot", "size": 10, "title": "UJAY MASTER FIX FUNDO DE INVESTIMENTO MULTIMERCADO", "value": 715.6049411999892}, {"color": "#fc91d17", "id": "16634623000156", "label": "16634623000156", "shape": "dot", "size": 10, "title": "M2 FUTURA FUNDO DE INVESTIMENTO MULTIMERCADO CREDITO PRIVADO INVESTIMENTO NO EXTERIOR", "value": 291.3643713565351}, {"color": "#fc91d17", "id": "18644558000175", "label": "18644558000175", "shape": "dot", "size": 10, "title": "CSHG ALLOCATION SPX NIMITZ CSHG FUNDO DE INVESTIMENTO EM COTAS DE FUNDO DE INVESTIMENTO MULTIMERCADO", "value": 55.67292242857806}, {"color": "#fc91d17", "id": "20468448000141", "label": "20468448000141", "shape": "dot", "size": 10, "title": "CSHG JIVE DISTRESSED ALLOCATION FI MULTIMERCADO CR\u00c9DITO PRIVADO IE", "value": 10.542304434467367}, {"color": "#fc91d17", "id": "28470590000135", "label": "28470590000135", "shape": "dot", "size": 10, "title": "GARIN CICLICO LONG BIASED FUNDO DE INVESTIMENTO MULTIMERCADO", "value": 126.77850846377584}, {"color": "#fc91d17", "id": "28568701000140", "label": "28568701000140", "shape": "dot", "size": 10, "title": "GARIN OR FUNDO DE INVESTIMENTO MULTIMERCADO", "value": 144.6022014284759}, {"color": "#fc91d17", "id": "29562681000163", "label": "29562681000163", "shape": "dot", "size": 10, "title": "UJAY VAULT FUNDO DE INVESTIMENTO MULTIMERCADO", "value": 72.72083955263614}, {"color": "#fc91d17", "id": "17439221000163", "label": "17439221000163", "shape": "dot", "size": 10, "title": "UJAY HEDGE II FUNDO DE INVESTIMENTO EM COTAS DE FUNDOS DE INVESTIMENTO MULTIMERCADO", "value": 526.2155774981334}, {"color": "#fc91d17", "id": "20240368000134", "label": "20240368000134", "shape": "dot", "size": 10, "title": "MARESIAS FUNDO DE INVESTIMENTO MULTIMERCADO CREDITO PRIVADO INVESTIMENTO NO EXTERIOR", "value": 293.3506450488797}, {"color": "#0095d9", "id": "8935364000175", "label": "8935364000175", "shape": "dot", "size": 10, "title": "SAFRA SOBERANO INSTITUCIONAL FIC DE FUNDOS DE INVESTIMENTO RENDA FIXA SIMPLES", "value": 46.03872992229086}, {"color": "#fc91d17", "id": "12105940000124", "label": "12105940000124", "shape": "dot", "size": 10, "title": "KAPITALO KAPPA FIN FUNDO DE INVESTIMENTO EM QUOTAS DE FUNDOS DE INVESTIMENTO MULTIMERCADO", "value": 30.815637895017257}, {"color": "#bfd730", "id": "12138862000164", "label": "12138862000164", "shape": "dot", "size": 10, "title": "FUNDO DE INVESTIMENTO EM DIREITOS CREDIT\u00d3RIOS MULTISETORIAL SILVERADO MAXIMUM II", "value": 9.140294888514155e-06}, {"color": "#fc91d17", "id": "12154412000165", "label": "12154412000165", "shape": "dot", "size": 10, "title": "IBIUNA HEDGE FUNDO DE INVESTIMENTO EM COTAS DE FUNDOS DE INVESTIMENTO MULTIMERCADO", "value": 31.99961796777616}, {"color": "#ffdf4f", "id": "14037308000116", "label": "14037308000116", "shape": "dot", "size": 10, "title": "CAMBURY FUNDO DE INVESTIMENTO EM PARTICIPA\u00c7\u00d5ES MULTIESTRAT\u00c9GIA", "value": 57.72600008398861}, {"color": "#fc91d17", "id": "17408524000119", "label": "17408524000119", "shape": "dot", "size": 10, "title": "BTGP ACCESS SPX NIMITZ FUNDO DE INVESTIMENTO EM QUOTAS DE FUNDOS DE INVESTIMENTO MULTIMERCADO", "value": 22.94963008449661}, {"color": "c1c1c1", "id": "21862162000109", "label": "21862162000109", "shape": "dot", "size": 10, "title": "FUNDO DE INVESTIMENTO EM DIREITOS CREDIT\u00d3RIOS ANG\u00c1 SABEMI CONSIGNADOS III", "value": 1.1814647081923861}, {"color": "#fc91d17", "id": "23922063000109", "label": "23922063000109", "shape": "dot", "size": 10, "title": "XP MACRO FUNDO DE INVESTIMENTO MULTIMERCADO", "value": 30.175810341866594}, {"color": "#fc91d17", "id": "32666390000120", "label": "32666390000120", "shape": "dot", "size": 10, "title": "MANAGER LEGACY CAPITAL S FUNDO DE INVESTIMENTO EM COTAS DE FUNDOS DE INVESTIMENTO MULTIMERCADO", "value": 23.62842806517353}, {"color": "#fc91d17", "id": "20046677000178", "label": "20046677000178", "shape": "dot", "size": 10, "title": "ITAIM FUNDO DE INVESTIMENTO MULTIMERCADO CREDITO PRIVADO INVESTIMENTO NO EXTERIOR", "value": 114.20579831803383}, {"color": "#0095d9", "id": "9215250000113", "label": "9215250000113", "shape": "dot", "size": 10, "title": "BTG PACTUAL TESOURO SELIC FUNDO DE INVESTIMENTO RENDA FIXA REFERENCIADO DI", "value": 0.0}, {"color": "#fc91d17", "id": "20378135000100", "label": "20378135000100", "shape": "dot", "size": 10, "title": "AWX EQUILIBRIUM FUNDO DE INVESTIMENTO EM COTAS DE FUNDOS DE INVESTIMENTO MULTIMERCADO", "value": 208.5231743693144}, {"color": "#fc91d17", "id": "31159179000158", "label": "31159179000158", "shape": "dot", "size": 10, "title": "M3 FUTURA FUNDO DE INVESTIMENTO MULTIMERCADO CREDITO PRIVADO INVESTIMENTO NO EXTERIOR", "value": 262.264891821713}, {"color": "#fc91d17", "id": "34081002000174", "label": "34081002000174", "shape": "dot", "size": 10, "title": "GARIN SPECIAL FUNDO DE INVESTIMENTO EM COTAS DE FUNDOS DE INVESTIMENTO MULTIMERCADO \u00c1GORA", "value": 383.9532257955807}, {"color": "#0095d9", "id": "8915927000163", "label": "8915927000163", "shape": "dot", "size": 10, "title": "BEM FUNDO DE INVESTIMENTO RENDA FIXA SIMPLES TPF", "value": 1.0396282873206835}]);
+        edges = new vis.DataSet([{"WEIGHT": 0.4761027114557436, "arrows": "to", "from": "12344535000169", "to": "807777000162", "weight": 1}, {"WEIGHT": 0.4232685054752695, "arrows": "to", "from": "12344535000169", "to": "10447046000107", "weight": 1}, {"WEIGHT": 1.569545464372143, "arrows": "to", "from": "12344535000169", "to": "30338659000113", "weight": 1}, {"WEIGHT": 1.644618946950213, "arrows": "to", "from": "12344535000169", "to": "9260031000156", "weight": 1}, {"WEIGHT": 4.250795373028952, "arrows": "to", "from": "30338659000113", "to": "29661053000135", "weight": 1}, {"WEIGHT": 0.21235173616570566, "arrows": "to", "from": "13855026000163", "to": "32754734000152", "weight": 1}, {"WEIGHT": 3.506295723886036, "arrows": "to", "from": "13418910000130", "to": "13855026000163", "weight": 1}, {"WEIGHT": 3.028432440533783, "arrows": "to", "from": "13418910000130", "to": "16839107000168", "weight": 1}, {"WEIGHT": 0.4643109126451893, "arrows": "to", "from": "16634623000156", "to": "10447046000107", "weight": 1}, {"WEIGHT": 0.1128488782815942, "arrows": "to", "from": "16634623000156", "to": "13855026000163", "weight": 1}, {"WEIGHT": 0.19262459412451619, "arrows": "to", "from": "16634623000156", "to": "18644558000175", "weight": 1}, {"WEIGHT": 0.03647567064652553, "arrows": "to", "from": "16634623000156", "to": "20468448000141", "weight": 1}, {"WEIGHT": 0.37640868325587995, "arrows": "to", "from": "16634623000156", "to": "28470590000135", "weight": 1}, {"WEIGHT": 0.46970898692080754, "arrows": "to", "from": "16634623000156", "to": "28568701000140", "weight": 1}, {"WEIGHT": 0.2516092470286601, "arrows": "to", "from": "16634623000156", "to": "29562681000163", "weight": 1}, {"WEIGHT": 1.7908244339928618, "arrows": "to", "from": "17439221000163", "to": "13855026000163", "weight": 1}, {"WEIGHT": 1.6478513270525692, "arrows": "to", "from": "17439221000163", "to": "16839107000168", "weight": 1}, {"WEIGHT": 0.30085059758500216, "arrows": "to", "from": "20240368000134", "to": "8935364000175", "weight": 1}, {"WEIGHT": 0.16555974462699236, "arrows": "to", "from": "20240368000134", "to": "10447046000107", "weight": 1}, {"WEIGHT": 0.20137182956441732, "arrows": "to", "from": "20240368000134", "to": "12105940000124", "weight": 1}, {"WEIGHT": 7.284066136492028e-08, "arrows": "to", "from": "20240368000134", "to": "12138862000164", "weight": 1}, {"WEIGHT": 0.2091088174764632, "arrows": "to", "from": "20240368000134", "to": "12154412000165", "weight": 1}, {"WEIGHT": 0.37722373092259626, "arrows": "to", "from": "20240368000134", "to": "14037308000116", "weight": 1}, {"WEIGHT": 0.14996960688659552, "arrows": "to", "from": "20240368000134", "to": "17408524000119", "weight": 1}, {"WEIGHT": 0.007720563799721314, "arrows": "to", "from": "20240368000134", "to": "21862162000109", "weight": 1}, {"WEIGHT": 0.19719073044086086, "arrows": "to", "from": "20240368000134", "to": "23922063000109", "weight": 1}, {"WEIGHT": 0.15356567021345413, "arrows": "to", "from": "20240368000134", "to": "28568701000140", "weight": 1}, {"WEIGHT": 0.15440536715997633, "arrows": "to", "from": "20240368000134", "to": "32666390000120", "weight": 1}, {"WEIGHT": 1.3111319045685652e-08, "arrows": "to", "from": "20046677000178", "to": "9215250000113", "weight": 1}, {"WEIGHT": 0.6992524186460332, "arrows": "to", "from": "20046677000178", "to": "10447046000107", "weight": 1}, {"WEIGHT": 0.04705142666548348, "arrows": "to", "from": "20046677000178", "to": "30338659000113", "weight": 1}, {"WEIGHT": 1.362642270862689, "arrows": "to", "from": "20378135000100", "to": "10447046000107", "weight": 1}, {"WEIGHT": 0.4126267339649165, "arrows": "to", "from": "31159179000158", "to": "10447046000107", "weight": 1}, {"WEIGHT": 0.10028724837327249, "arrows": "to", "from": "31159179000158", "to": "13855026000163", "weight": 1}, {"WEIGHT": 0.17118283244644625, "arrows": "to", "from": "31159179000158", "to": "18644558000175", "weight": 1}, {"WEIGHT": 0.03241543603237187, "arrows": "to", "from": "31159179000158", "to": "20468448000141", "weight": 1}, {"WEIGHT": 0.45205441809457814, "arrows": "to", "from": "31159179000158", "to": "28470590000135", "weight": 1}, {"WEIGHT": 0.32166143239290107, "arrows": "to", "from": "31159179000158", "to": "28568701000140", "weight": 1}, {"WEIGHT": 0.2236016834940589, "arrows": "to", "from": "31159179000158", "to": "29562681000163", "weight": 1}, {"WEIGHT": 2.5022362651560393, "arrows": "to", "from": "34081002000174", "to": "10447046000107", "weight": 1}, {"WEIGHT": 0.006793701347370157, "arrows": "to", "from": "34081002000174", "to": "8915927000163", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "physics"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
