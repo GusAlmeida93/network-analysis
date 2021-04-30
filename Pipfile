@@ -11,9 +11,7 @@ matplotlib = "*"
 scipy = "*"
 sklearn = "*"
 pytest = "*"
-netwulf = "*"
 pyvis = "*"
-streamlit = "*"
 
 [dev-packages]
 
